@@ -58,11 +58,11 @@ const onCategoryError = (categoryName, error) => {
   };
 };
 
-const persistCategory = (categoryName, topNews) => {
+const persistCategory = (categoryName, categoryData) => {
   return {
     type: CATEGORIES_PERSIST,
     payload: {
-      data: topNews.articles,
+      data: categoryData.articles,
       categoryName: categoryName,
     },
   };

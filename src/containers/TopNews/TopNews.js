@@ -4,34 +4,6 @@ import {connect} from 'react-redux';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
 import * as topNewsActions from '../../state/TopNews/actions';
 
-const newsData = [
-  {
-    title: 'Title1',
-    img: 'https://www.computerhope.com/jargon/r/random-dice.jpg',
-    description: 'description1',
-  },
-  {
-    title: 'Title2',
-    img: 'https://www.computerhope.com/jargon/r/random-dice.jpg',
-    description: 'description2',
-  },
-  {
-    title: 'Title3',
-    img: 'https://www.computerhope.com/jargon/r/random-dice.jpg',
-    description: 'description3',
-  },
-  {
-    title: 'Title4',
-    img: 'https://www.computerhope.com/jargon/r/random-dice.jpg',
-    description: 'description4',
-  },
-  {
-    title: 'Title5',
-    img: 'https://www.computerhope.com/jargon/r/random-dice.jpg',
-    description: 'description5',
-  },
-];
-
 class TopNews extends Component {
   static navigationOptions = {
     header: null,
