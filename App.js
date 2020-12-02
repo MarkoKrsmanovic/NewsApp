@@ -1,5 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import reducers from './src/state/index';
+import thunkMiddleware from 'redux-thunk';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import {colors} from './src/style/base';
@@ -48,14 +53,21 @@ const App: () => React$Node = () => {
     );
   }
 
+  const store = createStore(
+    reducers,
+    composeWithDevTools(applyMiddleware(thunkMiddleware)),
+  );
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="TabNavigator">
-        <Stack.Screen name="TabNavigator" component={TabNavigator} />
-        <Stack.Screen name="Article" component={Article} />
-        <Stack.Screen name="Category" component={Category} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="TabNavigator">
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="Article" component={Article} />
+          <Stack.Screen name="Category" component={Category} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

@@ -12,11 +12,12 @@ const ColumnsNewsList = ({listTitle, newsArray, onItemClick}) => {
         numColumns={2}
         columnWrapperStyle={{justifyContent: 'flex-start'}}
         data={newsArray}
+        keyExtractor={(item, index) => item.publishedAt + index}
         renderItem={({item, index}) => (
           <NewsItem
             index={index}
             title={item.title}
-            imageUri={item.img}
+            imageUri={item.urlToImage}
             onItemClick={onItemClick}
             description={item.description}
           />
