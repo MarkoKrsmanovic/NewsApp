@@ -6,7 +6,7 @@ import {
 } from '../actionTypes';
 
 import axios from '../../globals/axios';
-import {getTopNewsRoute, apiKey} from '../../globals/constants/ApiConstants';
+import {getTopNewsRoute} from '../../globals/constants/ApiConstants';
 
 export const getTopNews = () => {
   return (dispatch) => {
@@ -14,7 +14,6 @@ export const getTopNews = () => {
     const config = {
       params: {
         country: 'us',
-        apiKey: apiKey,
       },
     };
     axios
