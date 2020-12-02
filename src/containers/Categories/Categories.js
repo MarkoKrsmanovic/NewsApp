@@ -8,8 +8,9 @@ import {
   View,
 } from 'react-native';
 import style from './style';
+import {connect} from 'react-redux';
 import NewsItem from '../../components/NewsItem/NewsItem';
-import {categoriesContent} from '../../globals/constants/data';
+import * as categoriesActions from '../../state/Categories/actions';
 
 class Categories extends Component {
   constructor(props) {
@@ -18,15 +19,30 @@ class Categories extends Component {
     this.refsMap = new Map();
     this.indexesMap = new Map();
     this.index = 1;
+
+    this.props.getCategory('entertainment');
+    this.props.getCategory('general');
+    this.props.getCategory('health');
+    this.props.getCategory('science');
+    this.props.getCategory('sports');
+    this.props.getCategory('technology');
   }
 
   render() {
     this.flatListRef = null;
+    let sections = [
+      this.props.entertainment,
+      this.props.general,
+      this.props.health,
+      this.props.science,
+      this.props.sport,
+      this.props.technology,
+    ];
     return (
       <SafeAreaView style={style.containerStyle}>
         <Text>Categories</Text>
         <SectionList
-          sections={categoriesContent}
+          sections={sections}
           horizontal={false}
           keyExtractor={(item, index) => item.title + index}
           renderItem={({item, index}) => null}
@@ -66,8 +82,7 @@ class Categories extends Component {
                     renderItem={({item, index}) => (
                       <NewsItem
                         title={item.title}
-                        img={item.img}
-                        key={index}
+                        imageUri={item.urlToImage}
                         description={item.description}
                       />
                     )}
@@ -93,4 +108,19 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+const mapStateToProps = (state) => {
+  return {
+    entertainment: state.categories.entertainment,
+    general: state.categories.general,
+    health: state.categories.health,
+    science: state.categories.science,
+    sport: state.categories.sport,
+    technology: state.categories.technology,
+  };
+};
+
+const mapDispatchToProps = {
+  ...categoriesActions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
