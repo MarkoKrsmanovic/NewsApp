@@ -1,114 +1,62 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
+import {colors} from './src/style/base';
+import TopNews from './src/containers/TopNews/TopNews';
+import Categories from './src/containers/Categories/Categories';
+import Article from './src/components/Article/Article';
+import Category from './src/containers/Category/Category';
+import {Icon} from 'react-native-elements';
 
 const App: () => React$Node = () => {
+  const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
+
+  function TabNavigator() {
+    return (
+      <Tab.Navigator
+        initialRouteName="TopNews"
+        tabBarOptions={{
+          activeTintColor: colors.textColorLight,
+          inactiveTintColor: colors.textColorLightInactive,
+          activeBackgroundColor: colors.secondaryBackgroundColor,
+          inactiveBackgroundColor: colors.secondaryBackgroundColor,
+          labelPosition: 'beside-icon',
+        }}>
+        <Tab.Screen
+          name="TopNews"
+          component={TopNews}
+          options={{
+            tabBarLabel: 'Top News',
+            tabBarIcon: ({color, size}) => (
+              <Icon name="star-rate" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Categories"
+          component={Categories}
+          options={{
+            tabBarLabel: 'Categories',
+            tabBarIcon: ({color, size}) => (
+              <Icon name="list" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    );
+  }
+
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="TabNavigator">
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="Article" component={Article} />
+        <Stack.Screen name="Category" component={Category} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
