@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
+import {connect} from 'react-redux';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
+import * as topNewsActions from '../../state/TopNews/actions';
 
 const newsData = [
   {
@@ -37,14 +39,15 @@ class TopNews extends Component {
 
   constructor(props) {
     super(props);
+    this.props.getTopNews();
   }
 
   openArticle = (index) => {
-    const {img, title, description} = newsData[index];
+    const {urlToImage, title, content} = this.props.topNewsArticles[index];
     this.props.navigation.navigate('Article', {
-      imageUri: img,
+      imageUri: urlToImage,
       title: title,
-      description: description,
+      content: content,
     });
   };
 
@@ -53,7 +56,7 @@ class TopNews extends Component {
       <View style={{flex: 1}}>
         <ColumnsNewsList
           listTitle="Top News"
-          newsArray={newsData}
+          newsArray={this.props.topNewsArticles}
           onItemClick={this.openArticle}
         />
       </View>
@@ -61,4 +64,14 @@ class TopNews extends Component {
   }
 }
 
-export default TopNews;
+const mapStateToProps = (state) => {
+  return {
+    topNewsArticles: state.topNews.articles,
+  };
+};
+
+const mapDispatchToProps = {
+  ...topNewsActions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNews);

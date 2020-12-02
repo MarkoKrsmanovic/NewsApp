@@ -16,7 +16,7 @@ const ColumnsNewsList = ({listTitle, newsArray, onItemClick}) => {
           <NewsItem
             index={index}
             title={item.title}
-            imageUri={item.img}
+            imageUri={item.urlToImage}
             onItemClick={onItemClick}
             description={item.description}
           />

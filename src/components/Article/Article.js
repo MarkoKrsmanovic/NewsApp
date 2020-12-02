@@ -3,7 +3,7 @@ import {View, Image, Text} from 'react-native';
 import style from './style';
 
 const Article = ({route, navigation}) => {
-  const {imageUri, title, description} = route.params;
+  const {imageUri, title, content} = route.params;
   return (
     <View style={style.containerStyle}>
       <View style={style.articleHeaderContainerStyle}>
@@ -13,7 +13,7 @@ const Article = ({route, navigation}) => {
         </View>
       </View>
       <View style={style.descriptionContainerStyle}>
-        <Text style={style.descriptionTextStyle}>{description}</Text>
+        <Text style={style.descriptionTextStyle}>{content}</Text>
       </View>
     </View>
   );
