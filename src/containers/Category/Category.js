@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
 import * as categoryActions from '../../state/Category/actions';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import PropTypes from 'prop-types';
 
 class Category extends Component {
   constructor(props) {
@@ -65,6 +66,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   ...categoryActions,
+};
+
+Category.propTypes = {
+  categoryArticles: PropTypes.array,
+  loading: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({message: PropTypes.string}),
+  ]),
+  done: PropTypes.bool,
+  languageLongName: PropTypes.string,
+  getCategory: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

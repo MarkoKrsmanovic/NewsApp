@@ -12,7 +12,7 @@ import TopNews from './src/containers/TopNews/TopNews';
 import Categories from './src/containers/Categories/Categories';
 import Article from './src/components/Article/Article';
 import Category from './src/containers/Category/Category';
-import LanguageSelector from './src/components/LanguageSelector/LanguageSelector';
+import LanguageSelector from './src/containers/LanguageSelector/LanguageSelector';
 import {Icon} from 'react-native-elements';
 
 const App: () => React$Node = () => {

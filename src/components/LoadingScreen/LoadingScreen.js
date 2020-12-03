@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, ActivityIndicator} from 'react-native';
 import style, {loadingScreenColors} from './style';
+import PropTypes from 'prop-types';
 
 const LoadingScreen = ({loading, error, retry, retryText}) => {
   const renderRetryView = () => {
@@ -44,6 +45,14 @@ const LoadingScreen = ({loading, error, retry, retryText}) => {
       {!loading ? renderRetryView() : null}
     </View>
   );
+};
+
+LoadingScreen.propTypes = {
+  loading: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({message: PropTypes.string}),
+  ]),
 };
 
 export default LoadingScreen;

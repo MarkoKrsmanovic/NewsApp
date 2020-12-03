@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import style from './style';
+import PropTypes from 'prop-types';
 
 const NewsItem = ({title, description, imageUri, onItemClick, index}) => {
   return (
@@ -16,6 +17,14 @@ const NewsItem = ({title, description, imageUri, onItemClick, index}) => {
       </View>
     </TouchableWithoutFeedback>
   );
+};
+
+NewsItem.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  imageUri: PropTypes.string,
+  onItemClick: PropTypes.func,
+  index: PropTypes.number,
 };
 
 export default NewsItem;

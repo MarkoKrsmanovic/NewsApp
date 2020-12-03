@@ -2,6 +2,7 @@ import React from 'react';
 import {View, FlatList} from 'react-native';
 import style from './style';
 import NewsItem from '../NewsItem/NewsItem';
+import PropTypes from 'prop-types';
 
 const ColumnsNewsList = ({newsArray, onItemClick}) => {
   return (
@@ -24,6 +25,18 @@ const ColumnsNewsList = ({newsArray, onItemClick}) => {
       />
     </View>
   );
+};
+
+ColumnsNewsList.propTypes = {
+  newsArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      publishedAt: PropTypes.string,
+      title: PropTypes.string,
+      urlToImage: PropTypes.string,
+      description: PropTypes.string,
+    }),
+  ),
+  onItemClick: PropTypes.func,
 };
 
 export default ColumnsNewsList;
