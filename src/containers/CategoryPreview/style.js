@@ -17,7 +17,7 @@ const categoryPreviewStyles = createStyles({
     padding: 8,
   },
   contentRowContainerStyle: {
-    flex: 1,
+    height: 200,
     flexDirection: 'row',
     alignItems: 'center',
   },

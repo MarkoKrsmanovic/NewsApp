@@ -6,6 +6,7 @@ import {
 } from '../actionTypes';
 import axios from '../../globals/axios';
 import {getTopNewsRoute} from '../../globals/constants/ApiConstants';
+import {capitalizeString} from '../../utils/formattingUtils';
 
 export const getCategory = (categoryName) => {
   return (dispatch, getState) => {
@@ -38,7 +39,8 @@ const startCategoryFetching = (categoryName) => {
   return {
     type: CATEGORIES_LOADING,
     payload: {
-      status: 'Loading category...',
+      status:
+        'Loading news from ' + capitalizeString(categoryName) + ' category...',
       categoryName: categoryName,
     },
   };
