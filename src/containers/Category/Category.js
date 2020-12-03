@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import style from './style';
 import {connect} from 'react-redux';
-import {categoriesContent} from '../../globals/constants/data';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
 import * as categoryActions from '../../state/Category/actions';
 
