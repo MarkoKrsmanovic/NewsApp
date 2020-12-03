@@ -6,9 +6,13 @@ const NewsItem = ({title, description, imageUri, onItemClick, index}) => {
   return (
     <TouchableWithoutFeedback onPress={() => onItemClick(index)}>
       <View style={style.containerStyle}>
-        <Text>{title}</Text>
-        <Image style={{height: 100, width: 100}} source={{uri: imageUri}} />
-        <Text>{description}</Text>
+        <Text numberOfLines={2} ellipsizeMode="tail">
+          {title}
+        </Text>
+        <Image style={{flex: 1}} source={{uri: imageUri}} />
+        <Text numberOfLines={2} ellipsizeMode="tail">
+          {description}
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );

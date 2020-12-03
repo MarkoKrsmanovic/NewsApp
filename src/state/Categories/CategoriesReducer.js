@@ -34,7 +34,13 @@ let initialState = {
     done: false,
     error: false,
   },
-  sport: {title: 'Sport', data: [], loading: false, done: false, error: false},
+  sport: {
+    title: 'Sport',
+    data: [],
+    loading: false,
+    done: false,
+    error: false,
+  },
   technology: {
     title: 'Technology',
     data: [],
