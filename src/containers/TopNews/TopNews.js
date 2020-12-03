@@ -3,6 +3,7 @@ import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
 import * as topNewsActions from '../../state/TopNews/actions';
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 
 class TopNews extends Component {
   static navigationOptions = {
@@ -33,11 +34,24 @@ class TopNews extends Component {
     return (
       <View style={{flex: 1}}>
         <Text>Top news from {this.props.languageLongName}</Text>
-        <ColumnsNewsList
-          listTitle="Top News"
-          newsArray={this.props.topNewsArticles}
-          onItemClick={this.openArticle}
-        />
+        {this.props.done ? (
+          <View style={{flex: 1}}>
+            <ColumnsNewsList
+              listTitle="Top News"
+              newsArray={this.props.topNewsArticles}
+              onItemClick={this.openArticle}
+            />
+          </View>
+        ) : (
+          <View style={{flex: 1}}>
+            <LoadingScreen
+              error={this.props.error}
+              loading={this.props.loading}
+              retry={this.props.error ? this.props.getTopNews : null}
+              retryText={''}
+            />
+          </View>
+        )}
       </View>
     );
   }
@@ -46,6 +60,9 @@ class TopNews extends Component {
 const mapStateToProps = (state) => {
   return {
     topNewsArticles: state.topNews.articles,
+    loading: state.topNews.loading,
+    error: state.topNews.error,
+    done: state.topNews.done,
     languageLongName: state.newsLanguage.languageLongName,
   };
 };

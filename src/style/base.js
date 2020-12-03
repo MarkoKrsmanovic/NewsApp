@@ -20,6 +20,7 @@ export const colors = {
   textColor: '#252a34',
   textColorLight: '#ffffff',
   textColorLightInactive: '#bbbbbb',
+  errorTextColor: '#e94a68',
 };
 
 const baseStyles = {

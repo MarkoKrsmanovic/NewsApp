@@ -64,6 +64,7 @@ class Categories extends Component {
           renderItem={({item, index}) => null}
           renderSectionHeader={({section}) => (
             <CategoryPreview
+              retryMethod={this.props.getCategory}
               section={section}
               openCategory={this.openCategory}
               openArticle={this.openArticle}
