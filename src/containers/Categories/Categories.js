@@ -3,7 +3,7 @@ import {SafeAreaView, SectionList} from 'react-native';
 import style from './style';
 import {connect} from 'react-redux';
 import * as categoriesActions from '../../state/Categories/actions';
-import CategoryPreview from '../CategeryPreview/CategoryPreview';
+import CategoryPreview from '../CategoryPreview/CategoryPreview';
 
 class Categories extends Component {
   constructor(props) {
