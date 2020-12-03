@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
 import * as topNewsActions from '../../state/TopNews/actions';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import style from './style';
 import PropTypes from 'prop-types';
 
 class TopNews extends Component {
@@ -33,10 +34,12 @@ class TopNews extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Text>Top news from {this.props.languageLongName}</Text>
+      <View style={style.containerStyle}>
+        <Text style={style.headerTextStyle}>
+          Top news from {this.props.languageLongName}
+        </Text>
         {this.props.done ? (
-          <View style={{flex: 1}}>
+          <View style={style.containerStyle}>
             <ColumnsNewsList
               listTitle="Top News"
               newsArray={this.props.topNewsArticles}
@@ -44,7 +47,7 @@ class TopNews extends Component {
             />
           </View>
         ) : (
-          <View style={{flex: 1}}>
+          <View style={style.containerStyle}>
             <LoadingScreen
               error={this.props.error}
               loading={this.props.loading}

@@ -76,6 +76,8 @@ class CategoryPreview extends Component {
 
         <FlatList
           horizontal={true}
+          scrollEnabled={false}
+          showsHorizontalScrollIndicator={false}
           data={this.props.section.data}
           ref={(ref) => (this.flatListRef = ref)}
           renderItem={({item, index}) => (

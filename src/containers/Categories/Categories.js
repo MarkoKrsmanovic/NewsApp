@@ -56,7 +56,7 @@ class Categories extends Component {
     ];
     return (
       <SafeAreaView style={style.containerStyle}>
-        <Text>Top 5 news by categories from {this.props.languageName}</Text>
+        <Text style={style.headerTextStyle}>Top 5 news by categories from {this.props.languageName}</Text>
         <SectionList
           sections={sections}
           horizontal={false}
