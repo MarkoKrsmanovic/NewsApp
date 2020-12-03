@@ -11,10 +11,14 @@ export const categoryPreviewColors = {
 
 const categoryPreviewStyles = createStyles({
   containerStyle: {flex: 1, alignItems: 'center'},
+  titleBarContainerStyle: {flexDirection: 'row', width: dimensions.fullWidth},
   titleTextStyle: {
     color: colors.secondaryBackgroundColor,
     fontSize: 19,
-    padding: 8,
+    padding: dimensions.paddingS,
+    paddingLeft: dimensions.paddingM,
+    flex: 1,
+    textAlign: 'center',
   },
   contentRowContainerStyle: {
     height: 200,
