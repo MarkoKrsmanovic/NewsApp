@@ -13,3 +13,5 @@ export const CATEGORY_LOADING = 'CATEGORY_LOADING';
 export const CATEGORY_DONE = 'CATEGORY_DONE';
 export const CATEGORY_ERROR = 'CATEGORY_ERROR';
 export const CATEGORY_PERSIST = 'CATEGORY_PERSIST';
+// News language reducer constants
+export const NEWS_LANGUAGE_PERSIST = 'NEWS_LANGUAGE_PERSIST';

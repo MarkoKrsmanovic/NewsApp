@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SafeAreaView, SectionList} from 'react-native';
+import {SafeAreaView, SectionList, Text} from 'react-native';
 import style from './style';
 import {connect} from 'react-redux';
 import * as categoriesActions from '../../state/Categories/actions';
@@ -9,14 +9,23 @@ class Categories extends Component {
   constructor(props) {
     super(props);
     this.index = 1;
+    this.fetchAllCategories();
+  }
 
+  fetchAllCategories = () => {
     this.props.getCategory('entertainment');
     this.props.getCategory('general');
     this.props.getCategory('health');
     this.props.getCategory('science');
     this.props.getCategory('sport');
     this.props.getCategory('technology');
-  }
+  };
+
+  componentDidUpdate = (prevProps, prevState, snapshot) => {
+    if (prevProps.languageName !== this.props.languageName) {
+      this.fetchAllCategories();
+    }
+  };
 
   openCategory = (categoryName) => {
     this.props.navigation.navigate('Category', {
@@ -47,6 +56,7 @@ class Categories extends Component {
     ];
     return (
       <SafeAreaView style={style.containerStyle}>
+        <Text>Top 5 news by categories from {this.props.languageName}</Text>
         <SectionList
           sections={sections}
           horizontal={false}
@@ -73,6 +83,7 @@ const mapStateToProps = (state) => {
     science: state.categories.science,
     sport: state.categories.sport,
     technology: state.categories.technology,
+    languageName: state.newsLanguage.languageName,
   };
 };
 
