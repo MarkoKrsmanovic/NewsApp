@@ -8,11 +8,11 @@ import axios from '../../globals/axios';
 import {getTopNewsRoute} from '../../globals/constants/ApiConstants';
 
 export const getCategory = (categoryName) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(startCategoryFetching(categoryName));
     const config = {
       params: {
-        country: 'us',
+        country: getState().newsLanguage.languageCode,
         category: categoryName,
         pageSize: 5,
       },

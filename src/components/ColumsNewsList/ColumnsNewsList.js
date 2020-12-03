@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, Image, Text, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import style from './style';
 import NewsItem from '../NewsItem/NewsItem';
 
-const ColumnsNewsList = ({listTitle, newsArray, onItemClick}) => {
+const ColumnsNewsList = ({newsArray, onItemClick}) => {
   return (
     <View style={style.containerStyle}>
-      <Text>{listTitle}</Text>
       <FlatList
         horizontal={false}
         numColumns={2}

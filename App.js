@@ -12,6 +12,7 @@ import TopNews from './src/containers/TopNews/TopNews';
 import Categories from './src/containers/Categories/Categories';
 import Article from './src/components/Article/Article';
 import Category from './src/containers/Category/Category';
+import LanguageSelector from './src/components/LanguageSelector/LanguageSelector';
 import {Icon} from 'react-native-elements';
 
 const App: () => React$Node = () => {
@@ -62,9 +63,21 @@ const App: () => React$Node = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="TabNavigator">
-          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen
+            options={{
+              headerTitle: (props) => <LanguageSelector />,
+            }}
+            name="TabNavigator"
+            component={TabNavigator}
+          />
           <Stack.Screen name="Article" component={Article} />
-          <Stack.Screen name="Category" component={Category} />
+          <Stack.Screen
+            options={{
+              headerTitle: (props) => <LanguageSelector />,
+            }}
+            name="Category"
+            component={Category}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

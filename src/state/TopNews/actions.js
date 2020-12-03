@@ -9,11 +9,11 @@ import axios from '../../globals/axios';
 import {getTopNewsRoute} from '../../globals/constants/ApiConstants';
 
 export const getTopNews = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(startTopNewsFetching());
     const config = {
       params: {
-        country: 'us',
+        country: getState().newsLanguage.languageCode,
       },
     };
     axios
