@@ -4,6 +4,7 @@ import {Icon} from 'react-native-elements';
 import NewsItem from '../../components/NewsItem/NewsItem';
 import style, {categoryPreviewColors, categoryPreviewDimensions} from './style';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import PropTypes from 'prop-types';
 
 class CategoryPreview extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class CategoryPreview extends Component {
 
   toggleShowHide = () => {
     this.setState((prevState, props) => {
-      return {show: !prevState.show};
+      return {show: !prevState.show, scrollIndex: 0};
     });
   };
 
@@ -139,5 +140,20 @@ class CategoryPreview extends Component {
     );
   }
 }
+
+CategoryPreview.propTypes = {
+  section: PropTypes.shape({
+    title: PropTypes.string,
+    data: PropTypes.array,
+    loading: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    error: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.shape({message: PropTypes.string}),
+    ]),
+    done: PropTypes.bool,
+  }),
+  openCategory: PropTypes.func,
+  openArticle: PropTypes.func,
+};
 
 export default CategoryPreview;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
 import style from './style';
+import PropTypes from 'prop-types';
 
 const Article = ({route, navigation}) => {
   const {imageUri, title, content} = route.params;
@@ -17,6 +18,16 @@ const Article = ({route, navigation}) => {
       </View>
     </View>
   );
+};
+
+Article.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.exact({
+      imageUri: PropTypes.string,
+      title: PropTypes.string,
+      content: PropTypes.string,
+    }),
+  }),
 };
 
 export default Article;

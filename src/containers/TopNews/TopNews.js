@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import ColumnsNewsList from '../../components/ColumsNewsList/ColumnsNewsList';
 import * as topNewsActions from '../../state/TopNews/actions';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import PropTypes from 'prop-types';
 
 class TopNews extends Component {
   static navigationOptions = {
@@ -69,6 +70,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   ...topNewsActions,
+};
+
+TopNews.propTypes = {
+  getTopNews: PropTypes.func,
+  topNewsArticles: PropTypes.array,
+  loading: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({message: PropTypes.string}),
+  ]),
+  done: PropTypes.bool,
+  languageLongName: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopNews);

@@ -1,5 +1,5 @@
 export const backendRoot = 'https://newsapi.org/v2';
-export const apiKey = '20eaff4074cf4f788358eb1d9dcf7037';
+export const apiKey = '89288318a3f443f0a73f854a8b38c840';
 
 //top news routes
 export const getTopNewsRoute = '/top-headlines';

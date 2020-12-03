@@ -4,11 +4,11 @@ import style from './style';
 import {connect} from 'react-redux';
 import * as categoriesActions from '../../state/Categories/actions';
 import CategoryPreview from '../CategoryPreview/CategoryPreview';
+import PropTypes from 'prop-types';
 
 class Categories extends Component {
   constructor(props) {
     super(props);
-    this.index = 1;
     this.fetchAllCategories();
   }
 
@@ -90,6 +90,28 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   ...categoriesActions,
+};
+
+let categoryPropTypes = PropTypes.exact({
+  title: PropTypes.string,
+  data: PropTypes.array,
+  loading: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({message: PropTypes.string}),
+  ]),
+  done: PropTypes.bool,
+});
+
+Categories.propTypes = {
+  entertainment: categoryPropTypes,
+  general: categoryPropTypes,
+  health: categoryPropTypes,
+  science: categoryPropTypes,
+  sport: categoryPropTypes,
+  technology: categoryPropTypes,
+  languageName: PropTypes.string,
+  getCategory: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

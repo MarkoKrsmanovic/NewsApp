@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import style from './style';
 import * as newsLanguageActions from '../../state/NewsLanguage/actions';
 import {languageOptions} from '../../globals/constants/consts';
+import PropTypes from 'prop-types';
 
 class LanguageSelector extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class LanguageSelector extends Component {
     return (
       <View style={style.containerStyle}>
         <Picker
-          selectedValue={this.props.newsLanguage.languageCode}
+          selectedValue={this.props.languageCode}
           style={style.pickerStyle}
           mode="dropdown"
           onValueChange={(itemValue, itemIndex) =>
@@ -50,12 +51,17 @@ class LanguageSelector extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    newsLanguage: state.newsLanguage,
+    languageCode: state.newsLanguage.languageCode,
   };
 };
 
 const mapDispatchToProps = {
   ...newsLanguageActions,
+};
+
+LanguageSelector.propTypes = {
+  languageCode: PropTypes.string,
+  changeNewsLanguage: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LanguageSelector);
