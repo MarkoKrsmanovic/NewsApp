@@ -8,13 +8,21 @@ const Article = ({route, navigation}) => {
   return (
     <View style={style.containerStyle}>
       <View style={style.articleHeaderContainerStyle}>
-        <Image source={{uri: imageUri}} style={style.articleImageStyle} />
+        <Image
+          source={{uri: imageUri}}
+          style={style.articleImageStyle}
+          testID="article-image"
+        />
         <View style={style.articleTitleContainerStyle}>
-          <Text style={style.articleTitleTextStyle}>{title}</Text>
+          <Text style={style.articleTitleTextStyle} testID="article-title">
+            {title}
+          </Text>
         </View>
       </View>
       <View style={style.descriptionContainerStyle}>
-        <Text style={style.descriptionTextStyle}>{content}</Text>
+        <Text style={style.descriptionTextStyle} testID="article-content">
+          {content}
+        </Text>
       </View>
     </View>
   );

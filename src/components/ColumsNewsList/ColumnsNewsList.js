@@ -12,6 +12,7 @@ const ColumnsNewsList = ({newsArray, onItemClick}) => {
         numColumns={2}
         columnWrapperStyle={{justifyContent: 'flex-start'}}
         data={newsArray}
+        testID="columns-news-flatlist"
         keyExtractor={(item, index) => item.publishedAt + index}
         renderItem={({item, index}) => (
           <NewsItem
