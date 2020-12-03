@@ -59,20 +59,33 @@ const App: () => React$Node = () => {
     composeWithDevTools(applyMiddleware(thunkMiddleware)),
   );
 
+  const baseHeaderOptions = {
+    headerStyle: {
+      backgroundColor: colors.secondaryBackgroundColor,
+    },
+    headerTintColor: colors.textColorLight,
+  };
+
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="TabNavigator">
           <Stack.Screen
             options={{
+              ...baseHeaderOptions,
               headerTitle: (props) => <LanguageSelector />,
             }}
             name="TabNavigator"
             component={TabNavigator}
           />
-          <Stack.Screen name="Article" component={Article} />
+          <Stack.Screen
+            options={baseHeaderOptions}
+            name="Article"
+            component={Article}
+          />
           <Stack.Screen
             options={{
+              ...baseHeaderOptions,
               headerTitle: (props) => <LanguageSelector />,
             }}
             name="Category"

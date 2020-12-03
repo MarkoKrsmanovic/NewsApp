@@ -21,6 +21,7 @@ export const colors = {
   textColorLight: '#ffffff',
   textColorLightInactive: '#bbbbbb',
   errorTextColor: '#e94a68',
+  headerBackgroundColor: '#db7b8a',
 };
 
 const baseStyles = {
@@ -29,6 +30,12 @@ const baseStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.backgroundColor,
+  },
+  headerTextStyle: {
+    fontSize: 19,
+    color: colors.textColorLight,
+    padding: dimensions.paddingM,
+    backgroundColor: colors.headerBackgroundColor,
   },
 };
 

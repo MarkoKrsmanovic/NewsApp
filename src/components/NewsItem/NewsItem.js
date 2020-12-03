@@ -1,20 +1,25 @@
 import React from 'react';
-import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
+import {Text, TouchableWithoutFeedback} from 'react-native';
 import style from './style';
+import {Card} from 'react-native-elements';
 import PropTypes from 'prop-types';
 
 const NewsItem = ({title, description, imageUri, onItemClick, index}) => {
   return (
     <TouchableWithoutFeedback onPress={() => onItemClick(index)}>
-      <View style={style.containerStyle}>
-        <Text numberOfLines={2} ellipsizeMode="tail">
+      <Card containerStyle={style.containerStyle}>
+        <Card.Title numberOfLines={1} ellipsizeMode="tail">
           {title}
-        </Text>
-        <Image style={{flex: 1}} source={{uri: imageUri}} />
-        <Text numberOfLines={2} ellipsizeMode="tail">
+        </Card.Title>
+        <Card.Divider />
+        <Card.Image source={{uri: imageUri}} />
+        <Text
+          numberOfLines={3}
+          ellipsizeMode="tail"
+          style={style.descriptionTextStyle}>
           {description}
         </Text>
-      </View>
+      </Card>
     </TouchableWithoutFeedback>
   );
 };

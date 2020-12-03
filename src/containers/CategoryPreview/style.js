@@ -11,19 +11,27 @@ export const categoryPreviewColors = {
 
 const categoryPreviewStyles = createStyles({
   containerStyle: {flex: 1, alignItems: 'center'},
-  titleBarContainerStyle: {flexDirection: 'row', width: dimensions.fullWidth},
+  titleBarContainerStyle: {
+    flexDirection: 'row',
+    width: dimensions.fullWidth,
+    backgroundColor: colors.textColorLight,
+    borderBottomColor: colors.textColorLightInactive,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+  },
   titleTextStyle: {
     color: colors.secondaryBackgroundColor,
     fontSize: 19,
     padding: dimensions.paddingS,
     paddingLeft: dimensions.paddingM,
     flex: 1,
-    textAlign: 'center',
   },
   contentRowContainerStyle: {
-    height: 200,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: dimensions.paddingS,
+    marginTop: dimensions.paddingXS,
   },
   arrowIconStyle: {
     padding: dimensions.paddingS,

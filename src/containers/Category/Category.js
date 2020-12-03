@@ -32,7 +32,7 @@ class Category extends Component {
   render() {
     return (
       <View style={style.containerStyle}>
-        <Text>
+        <Text style={style.headerTextStyle}>
           Top {this.categoryName} news from {this.props.languageLongName}
         </Text>
         {this.props.done ? (
