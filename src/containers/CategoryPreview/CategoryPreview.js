@@ -11,6 +11,7 @@ class CategoryPreview extends Component {
     this.flatListRef = null;
     this.state = {
       scrollIndex: 0,
+      show: true,
     };
   }
 
@@ -40,6 +41,12 @@ class CategoryPreview extends Component {
     }
   };
 
+  toggleShowHide = () => {
+    this.setState((prevState, props) => {
+      return {show: !prevState.show};
+    });
+  };
+
   openArticle = (index) => {
     this.props.openArticle(this.props.section.title, index);
   };
@@ -48,72 +55,86 @@ class CategoryPreview extends Component {
     this.props.retryMethod(this.props.section.title.toLowerCase());
   };
 
+  renderCategoryList = () => {
+    return this.props.section.done ? (
+      <View style={style.contentRowContainerStyle}>
+        <TouchableWithoutFeedback
+          disabled={this.state.scrollIndex === 0}
+          onPress={() => this.moveSelectionLeft(this.props.section.title)}>
+          <Icon
+            name="keyboard-arrow-left"
+            size={categoryPreviewDimensions.arrowIconStyle}
+            color={
+              this.state.scrollIndex > 0
+                ? categoryPreviewColors.iconColor
+                : categoryPreviewColors.iconInactiveColor
+            }
+            style={style.arrowIconStyle}
+          />
+        </TouchableWithoutFeedback>
+
+        <FlatList
+          horizontal={true}
+          data={this.props.section.data}
+          ref={(ref) => (this.flatListRef = ref)}
+          renderItem={({item, index}) => (
+            <NewsItem
+              index={index}
+              onItemClick={this.openArticle}
+              title={item.title}
+              imageUri={item.urlToImage}
+              description={item.description}
+            />
+          )}
+        />
+
+        <TouchableWithoutFeedback
+          disabled={
+            this.state.scrollIndex === this.props.section.data.length - 1
+          }
+          onPress={() => this.moveSelectionRight(this.props.section.title)}>
+          <Icon
+            name="keyboard-arrow-right"
+            size={categoryPreviewDimensions.arrowIconStyle}
+            color={
+              this.state.scrollIndex < this.props.section.data.length - 1
+                ? categoryPreviewColors.iconColor
+                : categoryPreviewColors.iconInactiveColor
+            }
+            style={style.arrowIconStyle}
+          />
+        </TouchableWithoutFeedback>
+      </View>
+    ) : (
+      <View style={style.contentRowContainerStyle}>
+        <LoadingScreen
+          error={this.props.section.error}
+          loading={this.props.section.loading}
+          retry={this.props.section.error ? this.retryFetching : null}
+          retryText={''}
+        />
+      </View>
+    );
+  };
+
   render() {
     return (
       <View style={style.containerStyle}>
-        <TouchableWithoutFeedback
-          onPress={() => this.props.openCategory(this.props.section.title)}>
-          <Text style={style.titleTextStyle}>{this.props.section.title}</Text>
-        </TouchableWithoutFeedback>
-        {this.props.section.done ? (
-          <View style={style.contentRowContainerStyle}>
-            <TouchableWithoutFeedback
-              disabled={this.state.scrollIndex === 0}
-              onPress={() => this.moveSelectionLeft(this.props.section.title)}>
-              <Icon
-                name="keyboard-arrow-left"
-                size={categoryPreviewDimensions.arrowIconStyle}
-                color={
-                  this.state.scrollIndex > 0
-                    ? categoryPreviewColors.iconColor
-                    : categoryPreviewColors.iconInactiveColor
-                }
-                style={style.arrowIconStyle}
-              />
-            </TouchableWithoutFeedback>
-
-            <FlatList
-              horizontal={true}
-              data={this.props.section.data}
-              ref={(ref) => (this.flatListRef = ref)}
-              renderItem={({item, index}) => (
-                <NewsItem
-                  index={index}
-                  onItemClick={this.openArticle}
-                  title={item.title}
-                  imageUri={item.urlToImage}
-                  description={item.description}
-                />
-              )}
+        <View style={style.titleBarContainerStyle}>
+          <TouchableWithoutFeedback
+            onPress={() => this.props.openCategory(this.props.section.title)}>
+            <Text style={style.titleTextStyle}>{this.props.section.title}</Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => this.toggleShowHide()}>
+            <Icon
+              name={this.state.show ? 'arrow-drop-up' : 'arrow-drop-down'}
+              size={categoryPreviewDimensions.arrowIconStyle}
+              color={categoryPreviewColors.iconColor}
+              style={style.arrowIconStyle}
             />
-
-            <TouchableWithoutFeedback
-              disabled={
-                this.state.scrollIndex === this.props.section.data.length - 1
-              }
-              onPress={() => this.moveSelectionRight(this.props.section.title)}>
-              <Icon
-                name="keyboard-arrow-right"
-                size={categoryPreviewDimensions.arrowIconStyle}
-                color={
-                  this.state.scrollIndex < this.props.section.data.length - 1
-                    ? categoryPreviewColors.iconColor
-                    : categoryPreviewColors.iconInactiveColor
-                }
-                style={style.arrowIconStyle}
-              />
-            </TouchableWithoutFeedback>
-          </View>
-        ) : (
-          <View style={style.contentRowContainerStyle}>
-            <LoadingScreen
-              error={this.props.section.error}
-              loading={this.props.section.loading}
-              retry={this.props.section.error ? this.retryFetching : null}
-              retryText={''}
-            />
-          </View>
-        )}
+          </TouchableWithoutFeedback>
+        </View>
+        {this.state.show ? this.renderCategoryList() : null}
       </View>
     );
   }
